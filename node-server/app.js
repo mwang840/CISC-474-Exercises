@@ -27,18 +27,29 @@ app.get("/api/v1/listUsers", function (req, res) {
   );
 });
 
-app.delete("/api/v1/listUsers", function (req, res) {
-  data = JSON.parse(data);
-  delete data["user" + req.query["user"]];
-  fs.writeFile(__dirname + "/data/users.json", JSON.stringify(data), (err) => {
-    if (err) {
-      console.log(err);
-      return;
-    }
-  });
+app.delete("/api/v1/deleteUser", function (req, res) {
+  fs.readFile(
+    __dirname + "/data/" + "users.json",
+    "utf8",
+    function (err, data) {
+      data = JSON.parse(data);
+      delete data["user" + req.query["user"]];
 
-  console.log(data);
-  res.end(JSON.stringify(data));
+      fs.writeFile(
+        __filename + "/data/users.json",
+        JSON.stringify(data),
+        (err) => {
+          if (err) {
+            console.error(err);
+            return;
+          }
+        }
+      );
+
+      console.log(data);
+      res.end(JSON.stringify(data));
+    }
+  );
 });
 
 app.use("/", express.static(path.join(__dirname, "")));
