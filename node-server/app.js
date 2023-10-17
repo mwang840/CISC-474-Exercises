@@ -52,6 +52,52 @@ app.delete("/api/v1/deleteUser", function (req, res) {
   );
 });
 
+app.post("/api/v1/addUser", function (req, res) {
+  fs.readFile(
+    __dirname + "/data/" + "users.json",
+    "utf8",
+    function (err, data) {
+      data = JSON.parse(data);
+      var userVal = "user" + req.query["user"];
+      var sendObj = {
+        name: req.query["name"],
+        password: req.query["password"],
+        profression: req.query["profession"],
+        id: req.query["user"],
+      };
+      data[userVal] = sendObj;
+
+      fs.writeFile(
+        __dirname + "/data/users.json",
+        JSON.stringify(data),
+        (err) => {
+          if (err) {
+            console.error(err);
+            return;
+          }
+        }
+      );
+
+      console.log(data);
+      res.end(JSON.stringify(data));
+    }
+  );
+});
+
+app.get("/api/v1/filterUser", function (req, res) {
+  fs.readFile(
+    __dirname + "/data/" + "users.json",
+    "utf8",
+    function (err, data) {
+      var searchUser = req.query["user"];
+      var currentUser = JSON.parse(data);
+      var foundUserId = currentUser["user" + searchUser];
+      console.log("Found this user with an id of ", foundUserId);
+      res.end(JSON.stringify(foundUserId));
+    }
+  );
+});
+
 app.use("/", express.static(path.join(__dirname, "")));
 //Make sure nothing goes below app
 app.listen(port, () => {
