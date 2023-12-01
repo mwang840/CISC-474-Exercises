@@ -9,5 +9,9 @@
   },
   "keywords": [],
   "author": "Maxwell Wang",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "firebase": "^10.7.0",
+    "firebase-admin": "^11.11.1"
+  }
 }

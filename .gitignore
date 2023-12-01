@@ -131,3 +131,4 @@ dist
 
 #ignores package files
 package-lock.json
+firebase.json
