@@ -1,6 +1,7 @@
 const http = require("http");
 const port = 8080;
 const admin = require("firebase-admin");
+//Path update, rules fixed
 const serviceAccount = require("./etc/secrets/firebase.json");
 const { getDatabase } = require("firebase-admin/database");
 
