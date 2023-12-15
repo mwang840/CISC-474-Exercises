@@ -131,4 +131,4 @@ dist
 
 #ignores package files
 package-lock.json
-firebase.json
+/etc/secrets/firebase.json
