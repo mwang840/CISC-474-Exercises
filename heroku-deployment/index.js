@@ -9,7 +9,7 @@ const server = http.createServer(function (req, res){
     res.end();
 })
 
-var serviceAccount = require("./etc/secrets/firebase.json");
+var serviceAccount = require("/etc/secrets/firebase.json");
 const { getDatabase } = require("firebase-admin/database");
 
 
